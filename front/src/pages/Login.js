@@ -28,6 +28,8 @@ export const Login = () => {
         token: response.token,
         roles: response.data.roles,
       });
+    } else {
+      alert("Incorrect username or password");
     }
   };
 

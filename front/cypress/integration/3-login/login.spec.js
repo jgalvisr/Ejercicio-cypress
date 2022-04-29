@@ -20,12 +20,20 @@ describe('Login', () => {
     cy.visit('/login');
   });
 
-  it('displays form', () => {
+  it('logs in correctly', () => {
     cy.get('#username').type('isis3710');
     cy.get('#password').type('isis3710');
-
     cy.get('.btn.btn-primary').click();
-    //TODO expect here
+
+    cy.get('#navbarNav').contains('Products').should('be.visible');
   });
-  //Add new test
+  
+  it('fails login', () => {
+    cy.get('#username').type('isis3710');
+    cy.get('#password').type('sis3710');
+    cy.get('.btn.btn-primary').click();
+    cy.on('window:alert', (str) => {
+      expect(str).to.equal('Incorrect username or password')
+    })
+  })
 });
